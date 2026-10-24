@@ -1,182 +1,547 @@
+
 <!DOCTYPE html>
 <html lang="ms">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b0714">
 <title>XynoStore Gift Bid</title>
+
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;background:#0b0714;color:#fff;
-  font-family:Arial,sans-serif;padding:20px;
+* { box-sizing: border-box; }
+
+:root {
+  --bg: #0b0714;
+  --panel: #171024;
+  --border: #493064;
+  --purple: #9333ea;
+  --light: #d8b4fe;
+  --muted: #bca6d6;
 }
-main{max-width:650px;margin:auto}
-header{text-align:center;padding:20px 0}
-.logo{color:#c084fc;font-size:13px;letter-spacing:4px}
-h1{font-size:30px;margin:10px 0}
-h1 span{color:#c084fc}
-.sub{color:#aaa;font-size:13px}
-.panel{
-  background:#171024;border:1px solid #493064;
-  border-radius:18px;padding:18px;margin:14px 0;
+
+body {
+  margin: 0;
+  padding: 16px;
+  background: var(--bg);
+  color: white;
+  font-family: Arial, sans-serif;
 }
-.timer{text-align:center;font-size:48px;font-weight:bold;color:#d8b4fe}
-.status{text-align:center;color:#bca6d6;font-size:13px}
-button,input{
-  border-radius:10px;border:1px solid #493064;
-  padding:12px;background:#241635;color:white;
-  font-size:14px;max-width:100%;
+
+main {
+  width: 100%;
+  max-width: 650px;
+  margin: auto;
 }
-button{cursor:pointer;font-weight:bold}
-.primary{background:#9333ea;border:0}
-button:disabled{opacity:.4}
-.row{display:flex;gap:8px;flex-wrap:wrap}
-.row input{flex:1;min-width:100px}
-.row button{flex:1}
-h2{font-size:17px;margin-top:0}
-table{width:100%;border-collapse:collapse}
-th,td{text-align:left;padding:12px 5px;border-bottom:1px solid #332343}
-th{font-size:12px;color:#bca6d6}
-td{font-size:14px}
-.coins{text-align:right;color:#d8b4fe;font-weight:bold}
-.rank{width:38px}
-.note{font-size:12px;line-height:1.6;color:#aaa}
-.winner{text-align:center;color:#f0abfc;font-weight:bold}
-footer{text-align:center;color:#777;font-size:11px;padding:20px}
+
+header {
+  text-align: center;
+  padding: 24px 0;
+}
+
+.logo {
+  color: var(--light);
+  font-size: 13px;
+  letter-spacing: 5px;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: clamp(28px, 8vw, 40px);
+  margin: 12px 0;
+}
+
+h1 span { color: #c084fc; }
+
+.subtitle {
+  color: #aaa;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+  margin: 14px 0;
+  box-shadow: 0 5px 22px #0003;
+}
+
+h2 {
+  font-size: 17px;
+  margin: 0 0 16px;
+}
+
+.timer {
+  text-align: center;
+  font-size: clamp(45px, 14vw, 64px);
+  font-weight: 800;
+  color: var(--light);
+  font-variant-numeric: tabular-nums;
+  margin: 8px 0;
+}
+
+.status {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+input, button {
+  font: inherit;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+input {
+  width: 100%;
+  min-width: 0;
+  color: white;
+  background: #0e0a17;
+  border: 1px solid var(--border);
+  outline: none;
+}
+
+input:focus { border-color: #c084fc; }
+
+button {
+  color: white;
+  background: #241635;
+  border: 1px solid var(--border);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.primary {
+  background: var(--purple);
+  border-color: var(--purple);
+}
+
+.row {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.row > * { flex: 1; }
+
+.settings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.hint, .note {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #aaa;
+}
+
+.winner {
+  display: none;
+  text-align: center;
+  border: 1px solid #a855f7;
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 16px;
+  background: #29123c;
+  color: #f0abfc;
+  overflow-wrap: anywhere;
+}
+
+.winner strong {
+  display: block;
+  font-size: 19px;
+  margin: 8px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 12px 5px;
+  border-bottom: 1px solid #332343;
+  overflow-wrap: anywhere;
+}
+
+th {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+td { font-size: 13px; }
+
+.rank { width: 45px; }
+
+.coins {
+  text-align: right;
+  color: var(--light);
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+footer {
+  text-align: center;
+  padding: 22px 0;
+  color: #777;
+  font-size: 11px;
+}
+
+@media (max-width: 380px) {
+  body { padding: 9px; }
+  .panel { padding: 13px; }
+  .settings { grid-template-columns: 1fr; }
+  button, input { padding: 10px; }
+}
 </style>
 </head>
+
 <body>
 <main>
 <header>
   <div class="logo">X Y N O S T O R E</div>
   <h1>GIFT <span>BID</span></h1>
-  <div class="sub">HANTAR GIFT • KUMPUL COIN • JADI TOP 1</div>
+  <div class="subtitle">
+    GIFT • COIN • LEADERBOARD • TOP 1
+  </div>
 </header>
 
 <section class="panel">
+  <h2>⏱️ Tetapan Pusingan</h2>
+
+  <div class="settings">
+    <div>
+      <label for="minutes">Tempoh bid (minit)</label>
+      <input id="minutes" type="number"
+        min="1" max="180" step="1" value="3">
+    </div>
+    <div>
+      <label for="prize">Hadiah untuk Top 1</label>
+      <input id="prize" type="text"
+        maxlength="80" placeholder="Contoh: Robux">
+    </div>
+  </div>
+
   <div class="timer" id="timer">03:00</div>
   <div class="status" id="status">BID BELUM DIMULAKAN</div>
-  <div class="row" style="margin-top:18px">
-    <button class="primary" id="start">MULA BID 3 MINIT</button>
-    <button id="reset">RESET</button>
+
+  <div class="row">
+    <button class="primary" id="start">▶ MULA BID</button>
+    <button id="reset">↻ RESET</button>
   </div>
-  <p class="winner" id="winner"></p>
+
+  <div class="winner" id="winner" aria-live="polite"></div>
 </section>
 
 <section class="panel">
-  <h2>🎁 Tambah Gift / Coin (Demo)</h2>
-  <div class="row">
-    <input id="username" placeholder="Nama peserta">
-    <input id="amount" type="number" min="1"
-      step="1" placeholder="Jumlah coin">
-    <button class="primary" id="add">TAMBAH</button>
-  </div>
+  <h2>🎁 Tambah Gift / Coin</h2>
+
+  <label for="username">Nama peserta TikTok</label>
+  <input id="username" maxlength="30"
+    placeholder="Contoh: Ali123">
+
+  <div style="height:10px"></div>
+
+  <label for="amount">Nilai coin gift</label>
+  <input id="amount" type="number" min="1"
+    step="1" placeholder="Contoh: 100">
+
+  <div style="height:12px"></div>
+
+  <button class="primary" id="add" style="width:100%">
+    + TAMBAH COIN
+  </button>
+
   <p class="note">
-    Demo sahaja: masukkan nama dan nilai coin secara manual.
-    Belum disambungkan kepada gift TikTok LIVE.
+    MOD DEMO: Coin dimasukkan secara manual untuk ujian.
+    Website ini belum membaca gift TikTok LIVE secara automatik.
   </p>
 </section>
 
 <section class="panel">
   <h2>🏆 LEADERBOARD TOP 10</h2>
+
   <table>
-    <thead><tr>
-      <th class="rank">#</th><th>PEMENANG BID</th>
-      <th style="text-align:right">COIN</th>
-    </tr></thead>
-    <tbody id="board"></tbody>
+    <thead>
+      <tr>
+        <th class="rank">RANK</th>
+        <th>NAMA PESERTA</th>
+        <th style="text-align:right">COIN</th>
+      </tr>
+    </thead>
+    <tbody id="board">
+      <tr>
+        <td colspan="3" style="text-align:center;color:#aaa">
+          Belum ada peserta
+        </td>
+      </tr>
+    </tbody>
   </table>
-  <p class="note">Jumlah coin tertinggi berada di tempat pertama.</p>
+
+  <p class="note">
+    Kedudukan dikira berdasarkan jumlah coin terkumpul.
+    Jika seri, nama disusun mengikut abjad.
+  </p>
 </section>
 
-<footer>XynoStore © Gift Bid</footer>
+<footer>
+  XynoStore Gift Bid · Prototype
+</footer>
 </main>
+
 <script>
+"use strict";
+
 const $ = id => document.getElementById(id);
-let scores = {};
+
+let scores = Object.create(null);
 let running = false;
 let finished = false;
 let endAt = 0;
 let interval = null;
 let remaining = 180;
 
-function render(){
-  const sorted = Object.entries(scores)
-    .sort((a,b) => b[1]-a[1] || a[0].localeCompare(b[0]));
-  $("board").innerHTML = "";
-  if(!sorted.length){
-    $("board").innerHTML =
-      '<tr><td colspan="3">Belum ada peserta</td></tr>';
+function formatTime(seconds) {
+  seconds = Math.max(0, Math.ceil(seconds));
+  const minutes = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+
+  return String(minutes).padStart(2, "0") + ":" +
+         String(secs).padStart(2, "0");
+}
+
+function showTime(seconds) {
+  $("timer").textContent = formatTime(seconds);
+}
+
+function sortedScores() {
+  return Object.entries(scores).sort((a, b) =>
+    b[1] - a[1] ||
+    a[0].localeCompare(b[0], "ms", {sensitivity: "base"})
+  );
+}
+
+function renderBoard() {
+  const board = $("board");
+  board.replaceChildren();
+
+  const entries = sortedScores().slice(0, 10);
+
+  if (entries.length === 0) {
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    td.colSpan = 3;
+    td.textContent = "Belum ada peserta";
+    td.style.textAlign = "center";
+    td.style.color = "#aaa";
+    tr.appendChild(td);
+    board.appendChild(tr);
     return;
   }
-  sorted.slice(0,10).forEach(([name,coin],i)=>{
+
+  entries.forEach(([name, coins], index) => {
     const tr = document.createElement("tr");
-    [i===0?"👑 "+(i+1):i+1,name,coin.toLocaleString("en-US")].forEach((v,j)=>{
-      const td=document.createElement("td");
-      td.textContent=v;
-      if(j===2)td.className="coins";
-      tr.appendChild(td);
-    });
-    $("board").appendChild(tr);
+    const rank = document.createElement("td");
+    const player = document.createElement("td");
+    const total = document.createElement("td");
+
+    rank.className = "rank";
+    player.textContent = name;
+    total.className = "coins";
+    total.textContent = coins.toLocaleString("en-US");
+
+    rank.textContent = index === 0 ? "👑 1" : String(index + 1);
+
+    tr.append(rank, player, total);
+    board.appendChild(tr);
   });
 }
 
-function showTime(seconds){
-  seconds=Math.max(0,seconds);
-  $("timer").textContent =
-    String(Math.floor(seconds/60)).padStart(2,"0")+":"+
-    String(seconds%60).padStart(2,"0");
+function setControls() {
+  $("minutes").disabled = running;
+  $("prize").disabled = running;
+  $("start").disabled = running || finished;
+  $("add").disabled = !running;
 }
-function stopBid(){
-  running=false;finished=true;
+
+function finishBid() {
+  running = false;
+  finished = true;
   clearInterval(interval);
+  interval = null;
+
+  remaining = 0;
   showTime(0);
-  $("status").textContent="BID TAMAT";
-  $("start").disabled=true;
-  const sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
-  $("winner").textContent=sorted.length
-    ? "🏆 TOP 1: "+sorted[0][0]+" — "+sorted[0][1]+" COIN"
-    : "Tiada peserta. Tiada pemenang.";
-  $("add").disabled=true;
+
+  $("status").textContent = "BID TAMAT";
+  setControls();
+
+  const entries = sortedScores();
+  const result = $("winner");
+  result.style.display = "block";
+  result.replaceChildren();
+
+  const heading = document.createElement("div");
+  heading.textContent = "🏆 PEMENANG TOP 1";
+
+  const name = document.createElement("strong");
+  const coins = document.createElement("div");
+
+  if (entries.length === 0) {
+    name.textContent = "Tiada peserta";
+    coins.textContent = "Tiada pemenang untuk pusingan ini.";
+  } else {
+    name.textContent = entries[0][0];
+    coins.textContent =
+      entries[0][1].toLocaleString("en-US") + " coin";
+
+    const prize = $("prize").value.trim();
+    if (prize) {
+      const gift = document.createElement("div");
+      gift.style.marginTop = "10px";
+      gift.textContent = "Hadiah: " + prize;
+      result.appendChild(heading);
+      result.append(name, coins, gift);
+      return;
+    }
+  }
+
+  result.append(heading, name, coins);
 }
-function tick(){
-  remaining=Math.ceil((endAt-Date.now())/1000);
+
+function tick() {
+  remaining = Math.max(0, Math.ceil((endAt - Date.now()) / 1000));
   showTime(remaining);
-  if(remaining<=0)stopBid();
+
+  if (remaining <= 0) {
+    finishBid();
+  }
 }
-$("start").onclick=()=>{
-  if(running||finished)return;
-  running=true;
-  endAt=Date.now()+remaining*1000;
-  $("status").textContent="BID SEDANG BERLANGSUNG";
-  $("start").disabled=true;
-  interval=setInterval(tick,250);
+
+$("start").addEventListener("click", () => {
+  if (running || finished) return;
+
+  const mins = Number($("minutes").value);
+
+  if (!Number.isInteger(mins) || mins < 1 || mins > 180) {
+    alert("Masukkan tempoh antara 1 hingga 180 minit.");
+    return;
+  }
+
+  remaining = mins * 60;
+  endAt = Date.now() + remaining * 1000;
+  running = true;
+
+  $("winner").style.display = "none";
+  $("status").textContent = "BID SEDANG BERLANGSUNG";
+
+  setControls();
   tick();
-};
-$("add").onclick=()=>{
-  if(!running)return alert("Mulakan bid dahulu!");
-  const name=$("username").value.trim().slice(0,30);
-  const coin=Number($("amount").value);
-  if(!name||!Number.isSafeInteger(coin)||coin<1)
-    return alert("Masukkan nama dan jumlah coin yang sah.");
-  scores[name]=(scores[name]||0)+coin;
-  $("username").value="";
-  $("amount").value="";
-  render();
-};
-$("reset").onclick=()=>{
-  if(!confirm("Reset semua skor dan timer?"))return;
+
+  if (running) {
+    interval = setInterval(tick, 250);
+  }
+});
+
+$("add").addEventListener("click", () => {
+  if (!running) {
+    alert("Mulakan bid dahulu.");
+    return;
+  }
+
+  const name = $("username").value.trim();
+  const amountText = $("amount").value.trim();
+  const amount = Number(amountText);
+
+  if (!name) {
+    alert("Masukkan nama peserta.");
+    return;
+  }
+
+  if (!amountText || !Number.isSafeInteger(amount) || amount < 1) {
+    alert("Masukkan nilai coin bulat yang sah.");
+    return;
+  }
+
+  const existingName = Object.keys(scores).find(
+    key => key.toLocaleLowerCase() === name.toLocaleLowerCase()
+  );
+
+  const key = existingName || name;
+
+  if (!Number.isSafeInteger((scores[key] || 0) + amount)) {
+    alert("Jumlah coin terlalu besar.");
+    return;
+  }
+
+  scores[key] = (scores[key] || 0) + amount;
+
+  $("username").value = "";
+  $("amount").value = "";
+
+  renderBoard();
+  $("username").focus();
+});
+
+$("reset").addEventListener("click", () => {
+  if (!confirm("Reset timer dan semua skor untuk pusingan baharu?")) {
+    return;
+  }
+
   clearInterval(interval);
-  scores={};running=false;finished=false;
-  remaining=180;endAt=0;interval=null;
-  $("status").textContent="BID BELUM DIMULAKAN";
-  $("winner").textContent="";
-  $("start").disabled=false;
-  $("add").disabled=false;
-  showTime(180);render();
-};
-showTime(180);
-render();
+  interval = null;
+
+  scores = Object.create(null);
+  running = false;
+  finished = false;
+  endAt = 0;
+
+  const mins = Number($("minutes").value);
+  remaining = Number.isInteger(mins) && mins >= 1 && mins <= 180
+    ? mins * 60
+    : 180;
+
+  $("minutes").value = String(remaining / 60);
+  $("status").textContent = "BID BELUM DIMULAKAN";
+  $("winner").style.display = "none";
+  $("winner").replaceChildren();
+
+  showTime(remaining);
+  setControls();
+  renderBoard();
+});
+
+$("minutes").addEventListener("input", () => {
+  if (running || finished) return;
+
+  const mins = Number($("minutes").value);
+  if (Number.isInteger(mins) && mins >= 1 && mins <= 180) {
+    remaining = mins * 60;
+    showTime(remaining);
+  }
+});
+
+showTime(remaining);
+renderBoard();
+setControls();
 </script>
 </body>
 </html>
