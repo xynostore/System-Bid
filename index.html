@@ -6,541 +6,415 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b0714">
 <title>XynoStore Gift Bid</title>
-
 <style>
-* { box-sizing: border-box; }
-
-:root {
-  --bg: #0b0714;
-  --panel: #171024;
-  --border: #493064;
-  --purple: #9333ea;
-  --light: #d8b4fe;
-  --muted: #bca6d6;
-}
-
-body {
-  margin: 0;
-  padding: 16px;
-  background: var(--bg);
-  color: white;
-  font-family: Arial, sans-serif;
-}
-
-main {
-  width: 100%;
-  max-width: 650px;
-  margin: auto;
-}
-
-header {
-  text-align: center;
-  padding: 24px 0;
-}
-
-.logo {
-  color: var(--light);
-  font-size: 13px;
-  letter-spacing: 5px;
-  font-weight: bold;
-}
-
-h1 {
-  font-size: clamp(28px, 8vw, 40px);
-  margin: 12px 0;
-}
-
-h1 span { color: #c084fc; }
-
-.subtitle {
-  color: #aaa;
-  font-size: 12px;
-  letter-spacing: 1px;
-}
-
-.panel {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 18px;
-  margin: 14px 0;
-  box-shadow: 0 5px 22px #0003;
-}
-
-h2 {
-  font-size: 17px;
-  margin: 0 0 16px;
-}
-
-.timer {
-  text-align: center;
-  font-size: clamp(45px, 14vw, 64px);
-  font-weight: 800;
-  color: var(--light);
-  font-variant-numeric: tabular-nums;
-  margin: 8px 0;
-}
-
-.status {
-  text-align: center;
-  color: var(--muted);
-  font-size: 12px;
-  letter-spacing: 1px;
-  margin-bottom: 18px;
-}
-
-label {
-  display: block;
-  color: var(--muted);
-  font-size: 13px;
-  margin-bottom: 8px;
-}
-
-input, button {
-  font: inherit;
-  border-radius: 10px;
-  padding: 12px;
-}
-
-input {
-  width: 100%;
-  min-width: 0;
-  color: white;
-  background: #0e0a17;
-  border: 1px solid var(--border);
-  outline: none;
-}
-
-input:focus { border-color: #c084fc; }
-
-button {
-  color: white;
-  background: #241635;
-  border: 1px solid var(--border);
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:disabled {
-  opacity: .45;
-  cursor: not-allowed;
-}
-
-.primary {
-  background: var(--purple);
-  border-color: var(--purple);
-}
-
-.row {
-  display: flex;
-  gap: 9px;
-  flex-wrap: wrap;
-}
-
-.row > * { flex: 1; }
-
-.settings {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-
-.hint, .note {
-  font-size: 12px;
-  line-height: 1.6;
-  color: #aaa;
-}
-
-.winner {
-  display: none;
-  text-align: center;
-  border: 1px solid #a855f7;
-  border-radius: 12px;
-  padding: 15px;
-  margin-top: 16px;
-  background: #29123c;
-  color: #f0abfc;
-  overflow-wrap: anywhere;
-}
-
-.winner strong {
-  display: block;
-  font-size: 19px;
-  margin: 8px 0;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th, td {
-  text-align: left;
-  padding: 12px 5px;
-  border-bottom: 1px solid #332343;
-  overflow-wrap: anywhere;
-}
-
-th {
-  font-size: 11px;
-  color: var(--muted);
-}
-
-td { font-size: 13px; }
-
-.rank { width: 45px; }
-
-.coins {
-  text-align: right;
-  color: var(--light);
-  font-weight: bold;
-  white-space: nowrap;
-}
-
-footer {
-  text-align: center;
-  padding: 22px 0;
-  color: #777;
-  font-size: 11px;
-}
-
-@media (max-width: 380px) {
-  body { padding: 9px; }
-  .panel { padding: 13px; }
-  .settings { grid-template-columns: 1fr; }
-  button, input { padding: 10px; }
-}
+*{box-sizing:border-box}
+:root{--bg:#0b0714;--panel:#171024;--border:#493064;--purple:#9333ea;--light:#d8b4fe;--muted:#bca6d6}
+body{margin:0;padding:16px;background:var(--bg);color:white;font-family:Arial,sans-serif}
+main{width:100%;max-width:650px;margin:auto}
+header{text-align:center;padding:24px 0}
+.logo{color:var(--light);font-size:13px;letter-spacing:5px;font-weight:bold}
+h1{font-size:clamp(28px,8vw,40px);margin:12px 0}
+h1 span{color:#c084fc}
+.subtitle{color:#aaa;font-size:12px;letter-spacing:1px}
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 5px 22px #0003}
+h2{font-size:17px;margin:0 0 16px}
+.timer{text-align:center;font-size:clamp(45px,14vw,64px);font-weight:800;color:var(--light);font-variant-numeric:tabular-nums;margin:8px 0}
+.status{text-align:center;color:var(--muted);font-size:12px;letter-spacing:1px;margin-bottom:18px}
+label{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
+input,button{font:inherit;border-radius:10px;padding:12px}
+input{width:100%;min-width:0;color:white;background:#0e0a17;border:1px solid var(--border);outline:none}
+input:focus{border-color:#c084fc}
+button{color:white;background:#241635;border:1px solid var(--border);font-weight:bold;cursor:pointer}
+button:disabled{opacity:.45;cursor:not-allowed}
+.primary{background:var(--purple);border-color:var(--purple)}
+.row{display:flex;gap:9px;flex-wrap:wrap}
+.row>*{flex:1}
+.settings{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.note,.hint{font-size:12px;line-height:1.6;color:#aaa}
+.winner{display:none;text-align:center;border:1px solid #a855f7;border-radius:12px;padding:15px;margin-top:16px;background:#29123c;color:#f0abfc;overflow-wrap:anywhere}
+.winner strong{display:block;font-size:19px;margin:8px 0}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:12px 5px;border-bottom:1px solid #332343;overflow-wrap:anywhere}
+th{font-size:11px;color:var(--muted)}
+td{font-size:13px}
+.rank{width:45px}
+.coins{text-align:right;color:var(--light);font-weight:bold;white-space:nowrap}
+footer{text-align:center;padding:22px 0;color:#777;font-size:11px}
+@media(max-width:380px){body{padding:9px}.panel{padding:13px}.settings{grid-template-columns:1fr}button,input{padding:10px}}
 </style>
 </head>
-
 <body>
 <main>
 <header>
-  <div class="logo">X Y N O S T O R E</div>
-  <h1>GIFT <span>BID</span></h1>
-  <div class="subtitle">
-    GIFT • COIN • LEADERBOARD • TOP 1
-  </div>
+<div class="logo">X Y N O S T O R E</div>
+<h1>GIFT <span>BID</span></h1>
+<div class="subtitle">GIFT • COIN • LEADERBOARD • TOP 1</div>
 </header>
 
 <section class="panel">
-  <h2>⏱️ Tetapan Pusingan</h2>
+<h2>🎮 Pilih Mode</h2>
+<div class="row">
+<button class="primary" id="normalMode" type="button">NORMAL BID</button>
+<button id="eliminationMode" type="button">ELIMINATION</button>
+</div>
+<p class="note">Normal Bid menggunakan jumlah coin tertinggi. Elimination menyingkirkan peserta secara rawak mengikut timer.</p>
+</section>
 
-  <div class="settings">
-    <div>
-      <label for="minutes">Tempoh bid (minit)</label>
-      <input id="minutes" type="number"
-        min="1" max="180" step="1" value="3">
-    </div>
-    <div>
-      <label for="prize">Hadiah untuk Top 1</label>
-      <input id="prize" type="text"
-        maxlength="80" placeholder="Contoh: Robux">
-    </div>
-  </div>
+<section class="panel" id="normalSettings">
+<h2>⏱️ Tetapan Pusingan</h2>
+<div class="settings">
+<div>
+<label for="minutes">Tempoh bid (minit)</label>
+<input id="minutes" type="number" min="1" max="180" value="3">
+</div>
+<div>
+<label for="prize">Hadiah Top 1</label>
+<input id="prize" maxlength="80" placeholder="Contoh: Robux">
+</div>
+</div>
+<div class="timer" id="timer">03:00</div>
+<div class="status" id="status">BID BELUM DIMULAKAN</div>
+<div class="row">
+<button class="primary" id="start">▶ MULA BID</button>
+<button id="reset">↻ RESET</button>
+</div>
+<div class="winner" id="winner"></div>
+</section>
 
-  <div class="timer" id="timer">03:00</div>
-  <div class="status" id="status">BID BELUM DIMULAKAN</div>
-
-  <div class="row">
-    <button class="primary" id="start">▶ MULA BID</button>
-    <button id="reset">↻ RESET</button>
-  </div>
-
-  <div class="winner" id="winner" aria-live="polite"></div>
+<section class="panel" id="eliminationSettings" style="display:none">
+<h2>☠️ Tetapan Elimination</h2>
+<div class="settings">
+<div>
+<label for="elimSeconds">Masa setiap pusingan (saat)</label>
+<input id="elimSeconds" type="number" min="5" max="600" value="30">
+</div>
+<div>
+<label for="elimPrize">Hadiah pemenang</label>
+<input id="elimPrize" maxlength="80" placeholder="Contoh: Robux">
+</div>
+</div>
+<div class="timer" id="elimTimer">00:30</div>
+<div class="status" id="elimStatus">ELIMINATION BELUM DIMULAKAN</div>
+<div class="row">
+<button class="primary" id="elimStart">▶ MULA ELIMINATION</button>
+<button id="elimReset">↻ RESET</button>
+</div>
+<div class="winner" id="elimWinner"></div>
+<p class="note">Apabila timer tamat, seorang peserta aktif akan tersingkir secara rawak. Peserta tersingkir boleh masuk semula dengan menghantar gift lagi.</p>
 </section>
 
 <section class="panel">
-  <h2>🎁 Tambah Gift / Coin</h2>
-
-  <label for="username">Nama peserta TikTok</label>
-  <input id="username" maxlength="30"
-    placeholder="Contoh: Ali123">
-
-  <div style="height:10px"></div>
-
-  <label for="amount">Nilai coin gift</label>
-  <input id="amount" type="number" min="1"
-    step="1" placeholder="Contoh: 100">
-
-  <div style="height:12px"></div>
-
-  <button class="primary" id="add" style="width:100%">
-    + TAMBAH COIN
-  </button>
-
-  <p class="note">
-    MOD DEMO: Coin dimasukkan secara manual untuk ujian.
-    Website ini belum membaca gift TikTok LIVE secara automatik.
-  </p>
+<h2>🎁 Tambah Gift / Coin</h2>
+<label for="username">Nama peserta TikTok</label>
+<input id="username" maxlength="30" placeholder="Contoh: Ali123">
+<div style="height:10px"></div>
+<label for="amount">Nilai coin gift</label>
+<input id="amount" type="number" min="1" step="1" placeholder="Contoh: 100">
+<div style="height:12px"></div>
+<button class="primary" id="add" style="width:100%">+ TAMBAH COIN / GIFT</button>
+<p class="note">MOD DEMO: Gift dimasukkan secara manual. Auto-detect gift TikTok LIVE belum disambungkan.</p>
 </section>
 
-<section class="panel">
-  <h2>🏆 LEADERBOARD TOP 10</h2>
-
-  <table>
-    <thead>
-      <tr>
-        <th class="rank">RANK</th>
-        <th>NAMA PESERTA</th>
-        <th style="text-align:right">COIN</th>
-      </tr>
-    </thead>
-    <tbody id="board">
-      <tr>
-        <td colspan="3" style="text-align:center;color:#aaa">
-          Belum ada peserta
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p class="note">
-    Kedudukan dikira berdasarkan jumlah coin terkumpul.
-    Jika seri, nama disusun mengikut abjad.
-  </p>
+<section class="panel" id="elimParticipantsPanel" style="display:none">
+<h2>☠️ PESERTA ELIMINATION</h2>
+<div id="elimParticipants" class="hint">Belum ada peserta.</div>
 </section>
 
-<footer>
-  XynoStore Gift Bid · Prototype
-</footer>
+<section class="panel" id="normalBoardPanel">
+<h2>🏆 LEADERBOARD TOP 10</h2>
+<table>
+<thead><tr><th class="rank">RANK</th><th>NAMA PESERTA</th><th style="text-align:right">COIN</th></tr></thead>
+<tbody id="board"><tr><td colspan="3" style="text-align:center;color:#aaa">Belum ada peserta</td></tr></tbody>
+</table>
+<p class="note">Kedudukan dikira berdasarkan jumlah coin terkumpul. Jika seri, nama disusun mengikut abjad.</p>
+</section>
+<footer>XynoStore Gift Bid · Prototype</footer>
 </main>
 
 <script>
 "use strict";
+const $=id=>document.getElementById(id);
 
-const $ = id => document.getElementById(id);
+let scores=Object.create(null);
+let running=false;
+let finished=false;
+let endAt=0;
+let interval=null;
+let remaining=180;
+let currentMode="normal";
 
-let scores = Object.create(null);
-let running = false;
-let finished = false;
-let endAt = 0;
-let interval = null;
-let remaining = 180;
+let eliminationParticipants=[];
+let eliminationRunning=false;
+let eliminationInterval=null;
+let eliminationCountdown=null;
+let eliminationRemaining=30;
+let eliminationEndAt=0;
 
-function formatTime(seconds) {
-  seconds = Math.max(0, Math.ceil(seconds));
-  const minutes = Math.floor(seconds / 60);
-  const secs = seconds % 60;
-
-  return String(minutes).padStart(2, "0") + ":" +
-         String(secs).padStart(2, "0");
+function formatTime(seconds){
+ seconds=Math.max(0,Math.ceil(seconds));
+ return String(Math.floor(seconds/60)).padStart(2,"0")+":"+
+ String(seconds%60).padStart(2,"0");
 }
-
-function showTime(seconds) {
-  $("timer").textContent = formatTime(seconds);
+function showTime(seconds){$("timer").textContent=formatTime(seconds)}
+function sortedScores(){
+ return Object.entries(scores).sort((a,b)=>
+ b[1]-a[1]||a[0].localeCompare(b[0],"ms",{sensitivity:"base"}));
 }
-
-function sortedScores() {
-  return Object.entries(scores).sort((a, b) =>
-    b[1] - a[1] ||
-    a[0].localeCompare(b[0], "ms", {sensitivity: "base"})
-  );
+function renderBoard(){
+ const board=$("board");
+ board.replaceChildren();
+ const entries=sortedScores().slice(0,10);
+ if(!entries.length){
+  const tr=document.createElement("tr");
+  const td=document.createElement("td");
+  td.colSpan=3;td.textContent="Belum ada peserta";
+  td.style.textAlign="center";td.style.color="#aaa";
+  tr.appendChild(td);board.appendChild(tr);return;
+ }
+ entries.forEach(([name,coins],index)=>{
+  const tr=document.createElement("tr");
+  const rank=document.createElement("td");
+  const player=document.createElement("td");
+  const total=document.createElement("td");
+  rank.className="rank";player.textContent=name;
+  total.className="coins";total.textContent=coins.toLocaleString("en-US");
+  rank.textContent=index===0?"👑 1":String(index+1);
+  tr.append(rank,player,total);board.appendChild(tr);
+ });
 }
+function setControls(){
+ $("minutes").disabled=running;
+ $("prize").disabled=running;
+ $("start").disabled=running||finished;
+ $("add").disabled=currentMode==="normal"?!running:false;
+}
+function finishBid(){
+ running=false;finished=true;
+ clearInterval(interval);interval=null;
+ remaining=0;showTime(0);
+ $("status").textContent="BID TAMAT";
+ setControls();
+ const entries=sortedScores();
+ const result=$("winner");
+ result.style.display="block";result.replaceChildren();
+ const heading=document.createElement("div");
+ heading.textContent="🏆 PEMENANG TOP 1";
+ const name=document.createElement("strong");
+ const coins=document.createElement("div");
+ if(!entries.length){
+  name.textContent="Tiada peserta";
+  coins.textContent="Tiada pemenang untuk pusingan ini.";
+ }else{
+  name.textContent=entries[0][0];
+  coins.textContent=entries[0][1].toLocaleString("en-US")+" coin";
+ }
+ result.append(heading,name,coins);
+ if(entries.length&&$("prize").value.trim()){
+  const gift=document.createElement("div");
+  gift.style.marginTop="10px";
+  gift.textContent="Hadiah: "+$("prize").value.trim();
+  result.appendChild(gift);
+ }
+}
+function tick(){
+ remaining=Math.max(0,Math.ceil((endAt-Date.now())/1000));
+ showTime(remaining);
+ if(remaining<=0)finishBid();
+}
+$("start").addEventListener("click",()=>{
+ if(running||finished)return;
+ const mins=Number($("minutes").value);
+ if(!Number.isInteger(mins)||mins<1||mins>180){
+  alert("Masukkan tempoh antara 1 hingga 180 minit.");return;
+ }
+ remaining=mins*60;endAt=Date.now()+remaining*1000;running=true;
+ $("winner").style.display="none";
+ $("status").textContent="BID SEDANG BERLANGSUNG";
+ setControls();tick();
+ if(running)interval=setInterval(tick,250);
+});
+$("reset").addEventListener("click",()=>{
+ if(!confirm("Reset timer dan semua skor untuk pusingan baharu?"))return;
+ clearInterval(interval);interval=null;
+ scores=Object.create(null);running=false;finished=false;endAt=0;
+ const mins=Number($("minutes").value);
+ remaining=Number.isInteger(mins)&&mins>=1&&mins<=180?mins*60:180;
+ $("minutes").value=String(remaining/60);
+ $("status").textContent="BID BELUM DIMULAKAN";
+ $("winner").style.display="none";$("winner").replaceChildren();
+ showTime(remaining);setControls();renderBoard();
+});
+$("minutes").addEventListener("input",()=>{
+ if(running||finished)return;
+ const mins=Number($("minutes").value);
+ if(Number.isInteger(mins)&&mins>=1&&mins<=180){
+  remaining=mins*60;showTime(remaining);
+ }
+});
 
-function renderBoard() {
-  const board = $("board");
-  board.replaceChildren();
-
-  const entries = sortedScores().slice(0, 10);
-
-  if (entries.length === 0) {
-    const tr = document.createElement("tr");
-    const td = document.createElement("td");
-    td.colSpan = 3;
-    td.textContent = "Belum ada peserta";
-    td.style.textAlign = "center";
-    td.style.color = "#aaa";
-    tr.appendChild(td);
-    board.appendChild(tr);
-    return;
+function renderEliminationParticipants(){
+ const box=$("elimParticipants");box.replaceChildren();
+ if(!eliminationParticipants.length){box.textContent="Belum ada peserta.";return}
+ const active=eliminationParticipants.filter(p=>p.active);
+ const out=eliminationParticipants.filter(p=>!p.active);
+ function group(title,people){
+  const heading=document.createElement("p");
+  heading.style.fontWeight="bold";
+  heading.textContent=title+" ("+people.length+")";
+  box.appendChild(heading);
+  if(!people.length){
+   const empty=document.createElement("p");empty.textContent="Tiada";
+   empty.style.color="#aaa";box.appendChild(empty);return;
   }
-
-  entries.forEach(([name, coins], index) => {
-    const tr = document.createElement("tr");
-    const rank = document.createElement("td");
-    const player = document.createElement("td");
-    const total = document.createElement("td");
-
-    rank.className = "rank";
-    player.textContent = name;
-    total.className = "coins";
-    total.textContent = coins.toLocaleString("en-US");
-
-    rank.textContent = index === 0 ? "👑 1" : String(index + 1);
-
-    tr.append(rank, player, total);
-    board.appendChild(tr);
+  people.forEach(p=>{
+   const row=document.createElement("div");
+   row.style.cssText="display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid #332343;overflow-wrap:anywhere";
+   const name=document.createElement("span");name.textContent=p.name;
+   const status=document.createElement("span");
+   status.textContent=p.active?"🟢 Aktif":"❌ Tersingkir";
+   status.style.color=p.active?"#86efac":"#fda4af";
+   row.append(name,status);box.appendChild(row);
   });
+ }
+ group("Peserta aktif",active);
+ group("Tersingkir (boleh masuk semula dengan gift)",out);
 }
-
-function setControls() {
-  $("minutes").disabled = running;
-  $("prize").disabled = running;
-  $("start").disabled = running || finished;
-  $("add").disabled = !running;
+function setMode(mode){
+ if(running||eliminationRunning){
+  alert("Reset atau hentikan permainan sebelum menukar mode.");return;
+ }
+ currentMode=mode;
+ const normal=mode==="normal";
+ $("normalMode").classList.toggle("primary",normal);
+ $("eliminationMode").classList.toggle("primary",!normal);
+ $("normalSettings").style.display=normal?"":"none";
+ $("eliminationSettings").style.display=normal?"none":"";
+ $("normalBoardPanel").style.display=normal?"":"none";
+ $("elimParticipantsPanel").style.display=normal?"none":"";
+ setControls();
 }
+$("normalMode").addEventListener("click",()=>setMode("normal"));
+$("eliminationMode").addEventListener("click",()=>setMode("elimination"));
 
-function finishBid() {
-  running = false;
-  finished = true;
-  clearInterval(interval);
-  interval = null;
-
-  remaining = 0;
-  showTime(0);
-
-  $("status").textContent = "BID TAMAT";
-  setControls();
-
-  const entries = sortedScores();
-  const result = $("winner");
-  result.style.display = "block";
-  result.replaceChildren();
-
-  const heading = document.createElement("div");
-  heading.textContent = "🏆 PEMENANG TOP 1";
-
-  const name = document.createElement("strong");
-  const coins = document.createElement("div");
-
-  if (entries.length === 0) {
-    name.textContent = "Tiada peserta";
-    coins.textContent = "Tiada pemenang untuk pusingan ini.";
-  } else {
-    name.textContent = entries[0][0];
-    coins.textContent =
-      entries[0][1].toLocaleString("en-US") + " coin";
-
-    const prize = $("prize").value.trim();
-    if (prize) {
-      const gift = document.createElement("div");
-      gift.style.marginTop = "10px";
-      gift.textContent = "Hadiah: " + prize;
-      result.appendChild(heading);
-      result.append(name, coins, gift);
-      return;
-    }
+$("add").addEventListener("click",()=>{
+ if(currentMode==="normal"&&!running){
+  alert("Mulakan bid dahulu.");return;
+ }
+ const name=$("username").value.trim();
+ const amountText=$("amount").value.trim();
+ const amount=Number(amountText);
+ if(!name){alert("Masukkan nama peserta.");return}
+ if(!amountText||!Number.isSafeInteger(amount)||amount<1){
+  alert("Masukkan nilai coin bulat yang sah.");return;
+ }
+ if(currentMode==="normal"){
+  const existing=Object.keys(scores).find(k=>k.toLowerCase()===name.toLowerCase());
+  const key=existing||name;
+  if(!Number.isSafeInteger((scores[key]||0)+amount)){
+   alert("Jumlah coin terlalu besar.");return;
   }
-
-  result.append(heading, name, coins);
-}
-
-function tick() {
-  remaining = Math.max(0, Math.ceil((endAt - Date.now()) / 1000));
-  showTime(remaining);
-
-  if (remaining <= 0) {
-    finishBid();
-  }
-}
-
-$("start").addEventListener("click", () => {
-  if (running || finished) return;
-
-  const mins = Number($("minutes").value);
-
-  if (!Number.isInteger(mins) || mins < 1 || mins > 180) {
-    alert("Masukkan tempoh antara 1 hingga 180 minit.");
-    return;
-  }
-
-  remaining = mins * 60;
-  endAt = Date.now() + remaining * 1000;
-  running = true;
-
-  $("winner").style.display = "none";
-  $("status").textContent = "BID SEDANG BERLANGSUNG";
-
-  setControls();
-  tick();
-
-  if (running) {
-    interval = setInterval(tick, 250);
-  }
+  scores[key]=(scores[key]||0)+amount;renderBoard();
+ }else{
+  const existing=eliminationParticipants.find(p=>p.name.toLowerCase()===name.toLowerCase());
+  if(existing){existing.active=true}
+  else{eliminationParticipants.push({name,active:true})}
+  renderEliminationParticipants();
+ }
+ $("username").value="";$("amount").value="";$("username").focus();
 });
 
-$("add").addEventListener("click", () => {
-  if (!running) {
-    alert("Mulakan bid dahulu.");
-    return;
-  }
-
-  const name = $("username").value.trim();
-  const amountText = $("amount").value.trim();
-  const amount = Number(amountText);
-
-  if (!name) {
-    alert("Masukkan nama peserta.");
-    return;
-  }
-
-  if (!amountText || !Number.isSafeInteger(amount) || amount < 1) {
-    alert("Masukkan nilai coin bulat yang sah.");
-    return;
-  }
-
-  const existingName = Object.keys(scores).find(
-    key => key.toLocaleLowerCase() === name.toLocaleLowerCase()
-  );
-
-  const key = existingName || name;
-
-  if (!Number.isSafeInteger((scores[key] || 0) + amount)) {
-    alert("Jumlah coin terlalu besar.");
-    return;
-  }
-
-  scores[key] = (scores[key] || 0) + amount;
-
-  $("username").value = "";
-  $("amount").value = "";
-
-  renderBoard();
-  $("username").focus();
+function stopElimination(message){
+ eliminationRunning=false;
+ clearInterval(eliminationInterval);
+ clearInterval(eliminationCountdown);
+ eliminationInterval=null;eliminationCountdown=null;
+ $("elimStatus").textContent=message;
+ $("elimStart").disabled=false;
+ $("elimSeconds").disabled=false;
+ $("elimPrize").disabled=false;
+}
+function finishElimination(winnerName){
+ stopElimination("ELIMINATION TAMAT");
+ $("elimTimer").textContent="00:00";
+ const result=$("elimWinner");
+ result.style.display="block";result.replaceChildren();
+ const heading=document.createElement("div");
+ heading.textContent="🏆 PEMENANG ELIMINATION";
+ const name=document.createElement("strong");
+ name.textContent=winnerName||"Tiada pemenang";
+ result.append(heading,name);
+ const prize=$("elimPrize").value.trim();
+ if(prize){
+  const gift=document.createElement("div");
+  gift.style.marginTop="8px";gift.textContent="Hadiah: "+prize;
+  result.appendChild(gift);
+ }
+}
+function updateEliminationCountdown(){
+ eliminationRemaining=Math.max(0,Math.ceil((eliminationEndAt-Date.now())/1000));
+ $("elimTimer").textContent=formatTime(eliminationRemaining);
+}
+function eliminateOne(){
+ if(!eliminationRunning)return;
+ const active=eliminationParticipants.filter(p=>p.active);
+ if(active.length<=1){
+  finishElimination(active.length?active[0].name:"");return;
+ }
+ const chosen=active[Math.floor(Math.random()*active.length)];
+ chosen.active=false;
+ $("elimStatus").textContent="TERSINGKIR: "+chosen.name;
+ renderEliminationParticipants();
+ const remainingActive=eliminationParticipants.filter(p=>p.active);
+ if(remainingActive.length<=1){
+  finishElimination(remainingActive.length?remainingActive[0].name:"");return;
+ }
+ eliminationRemaining=Number($("elimSeconds").value);
+ eliminationEndAt=Date.now()+eliminationRemaining*1000;
+ $("elimTimer").textContent=formatTime(eliminationRemaining);
+}
+$("elimStart").addEventListener("click",()=>{
+ if(eliminationRunning)return;
+ const secs=Number($("elimSeconds").value);
+ if(!Number.isInteger(secs)||secs<5||secs>600){
+  alert("Masukkan masa antara 5 hingga 600 saat.");return;
+ }
+ const active=eliminationParticipants.filter(p=>p.active);
+ if(active.length<2){
+  alert("Perlukan sekurang-kurangnya 2 peserta aktif. Tambah peserta dahulu.");return;
+ }
+ $("elimWinner").style.display="none";
+ eliminationRemaining=secs;eliminationEndAt=Date.now()+secs*1000;
+ eliminationRunning=true;
+ $("elimStart").disabled=true;
+ $("elimSeconds").disabled=true;$("elimPrize").disabled=true;
+ $("elimStatus").textContent="ELIMINATION SEDANG BERLANGSUNG";
+ $("elimTimer").textContent=formatTime(secs);
+ eliminationCountdown=setInterval(updateEliminationCountdown,250);
+ eliminationInterval=setInterval(()=>{
+  clearInterval(eliminationCountdown);eliminationCountdown=null;
+  eliminateOne();
+  if(eliminationRunning)eliminationCountdown=setInterval(updateEliminationCountdown,250);
+ },secs*1000);
 });
-
-$("reset").addEventListener("click", () => {
-  if (!confirm("Reset timer dan semua skor untuk pusingan baharu?")) {
-    return;
-  }
-
-  clearInterval(interval);
-  interval = null;
-
-  scores = Object.create(null);
-  running = false;
-  finished = false;
-  endAt = 0;
-
-  const mins = Number($("minutes").value);
-  remaining = Number.isInteger(mins) && mins >= 1 && mins <= 180
-    ? mins * 60
-    : 180;
-
-  $("minutes").value = String(remaining / 60);
-  $("status").textContent = "BID BELUM DIMULAKAN";
-  $("winner").style.display = "none";
-  $("winner").replaceChildren();
-
-  showTime(remaining);
-  setControls();
-  renderBoard();
+$("elimReset").addEventListener("click",()=>{
+ if(!confirm("Reset permainan Elimination dan semua peserta?"))return;
+ stopElimination("ELIMINATION BELUM DIMULAKAN");
+ eliminationParticipants=[];
+ eliminationRemaining=Number($("elimSeconds").value)||30;
+ $("elimTimer").textContent=formatTime(eliminationRemaining);
+ $("elimWinner").style.display="none";$("elimWinner").replaceChildren();
+ renderEliminationParticipants();
 });
-
-$("minutes").addEventListener("input", () => {
-  if (running || finished) return;
-
-  const mins = Number($("minutes").value);
-  if (Number.isInteger(mins) && mins >= 1 && mins <= 180) {
-    remaining = mins * 60;
-    showTime(remaining);
-  }
+$("elimSeconds").addEventListener("input",()=>{
+ if(eliminationRunning)return;
+ const secs=Number($("elimSeconds").value);
+ if(Number.isInteger(secs)&&secs>=5&&secs<=600){
+  eliminationRemaining=secs;$("elimTimer").textContent=formatTime(secs);
+ }
 });
-
 showTime(remaining);
 renderBoard();
+renderEliminationParticipants();
 setControls();
 </script>
 </body>
